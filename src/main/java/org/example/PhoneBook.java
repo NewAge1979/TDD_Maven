@@ -30,6 +30,13 @@ public class PhoneBook {
     }
 
     public String findByName(String name) {
-        return null;
+        String result = "Укажите имя абонента.";
+        if (name != null && !name.isEmpty()) {
+            result = myPhoneBook.get(name);
+            if (result == null) {
+                result = "Абонент не найден.";
+            }
+        }
+        return result;
     }
 }
