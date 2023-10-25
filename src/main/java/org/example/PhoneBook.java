@@ -11,4 +11,8 @@ public class PhoneBook {
         }
         return myPhoneBook.size();
     }
+
+    public String findByNumber(String phone) {
+        return null;
+    }
 }
