@@ -49,4 +49,20 @@ class PhoneBookTest {
     void findByNumberNullOrEmptyTest(String phone) {
         assertTrue(testPhoneBook.findByNumber(phone).equals("Укажите номер телефона."));
     }
+
+    @Test
+    void findByNameMainTest() {
+        assertTrue(testPhoneBook.findByName("Abonent 0").equals("(495) 111-22-33"));
+    }
+
+    @Test
+    void findByNameNotFoundTest() {
+        assertTrue(testPhoneBook.findByName("Abonent 1").equals("Абонент не найден."));
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void findByNameNullOrEmptyTest(String name) {
+        assertTrue(testPhoneBook.findByName(name).equals("Укажите имя абонента."));
+    }
 }
