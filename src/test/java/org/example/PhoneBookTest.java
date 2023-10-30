@@ -1,19 +1,26 @@
 package org.example;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PhoneBookTest {
     private PhoneBook testPhoneBook;
+    private ByteArrayOutputStream myOut = new ByteArrayOutputStream();
+
     @BeforeEach
     void init() {
         testPhoneBook = new PhoneBook();
         testPhoneBook.add("Abonent 0", "(495) 111-22-33");
+        System.setOut(new PrintStream(myOut));
     }
     @Test
     void addMainTest() {
@@ -64,5 +71,18 @@ class PhoneBookTest {
     @NullAndEmptySource
     void findByNameNullOrEmptyTest(String name) {
         assertTrue(testPhoneBook.findByName(name).equals("Укажите имя абонента."));
+    }
+
+    @Test
+    void printAllNamesTest() {
+        testPhoneBook.add("Abonent 2", "(495) 777-88-99");
+        testPhoneBook.add("Abonent 1", "(495) 444-55-66");
+        testPhoneBook.printAllNames();
+        assertEquals("Abonent 0\nAbonent 1\nAbonent 2\n", myOut.toString());
+    }
+
+    @AfterEach
+    void clear() {
+        System.setOut(null);
     }
 }
