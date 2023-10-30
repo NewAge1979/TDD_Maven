@@ -1,7 +1,9 @@
 package org.example;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class PhoneBook {
@@ -41,6 +43,7 @@ public class PhoneBook {
     }
 
     public void printAllNames() {
-        System.out.println();
+        Map<String, String> outData = new TreeMap<>(myPhoneBook);
+        outData.forEach((key, value) -> System.out.println(key));
     }
 }
